@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>simpleMap</title>
+    <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx568483eb58e3417fb1136f0158e7a251"></script>
+    <script type = "text/javascript">
+        function initTmap(){
+            var map = new Tmapv2.Map("map_div",
+                {
+                    center: new Tmapv2.LatLng(37.566481622437934,126.98502302169841), // 지도 초기 좌표
+                    width: "890px",
+                    height: "400px",
+                    zoom: 15
+                });
+            map.addListener("click", onClick);
+        }
+
+        function onClick(e) {
+            var result = '클릭한 위치의 좌표는' + e.latLng + '입니다.';
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = result;
+        }
+    </script>
+
+</head>
+
+
+
+<body onload="initTmap()">
+<div id="map_div"></div>
+<p id="result"></p>
+
+</body>
+
+
+
+
+</html>
