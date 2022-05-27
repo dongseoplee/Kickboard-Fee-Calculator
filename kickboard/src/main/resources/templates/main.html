@@ -19,8 +19,9 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet"/>
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx568483eb58e3417fb1136f0158e7a251"></script>
-    <script type="text/javascript" th:inline="javascript">
+    <script type="text/javascript">
         var map;
         let gpsLatitude;
         let gpsLongitude;
@@ -30,8 +31,12 @@
         // 페이지가 로딩이 된 후 호출하는 함수입니다.
         function initTmap() {
 
+
+            modal();
+
+
             //사용자가 모바일 환경인지 확인합니다
-            if(/Mobi|Android/i.test(navigator.userAgent)) {
+            if (/Mobi|Android/i.test(navigator.userAgent)) {
 
                 //map 기초좌표를 가천대로 설정합니다
                 map = new Tmapv2.Map("map_div", {
@@ -132,7 +137,7 @@
 
             //맵을 터치하였을 때 터치시작시 맵의 중앙좌표값 터치끝날시 맵의 중앙좌표값의 거리가 40이하이면 클릭으로 감지한다()
             //40 이상이면 드래그 이다.
-            if(dragEndPoint.distanceTo(dragStartPoint) > 40) {
+            if (dragEndPoint.distanceTo(dragStartPoint) > 40) {
                 return;
             }
 
@@ -165,7 +170,7 @@
 
         //출발지 선택
         function selectSP() {
-            if(markers.length == 0) {
+            if (markers.length == 0) {
                 alert("출발지를 선택하세요");
                 return;
             }
@@ -180,7 +185,7 @@
         }
 
         function selectEP() {
-            if(markers.length == 1) {
+            if (markers.length == 1) {
                 alert("도착지를 선택하세요");
                 return;
             }
@@ -200,7 +205,6 @@
         var resultdrawArr = [];
 
 
-
         var tDistance; // t map 이 측정한 이동거리
         var kickboardtime; //이동시간
 
@@ -213,7 +217,7 @@
 
         //출발지와 도착지 이동거리 및 시간을 요청한다.
         function result() {
-                document.getElementById("resultBtn").disabled = true;
+            document.getElementById("resultBtn").disabled = true;
             $
                 .ajax({
                     method: "POST",
@@ -320,11 +324,10 @@
                 type: "POST",
                 url: "/",
                 dataType: "text",
-                data : {
+                data: {
                     "distanceStr": tDistance.toString()
                 },
-                success: function(result) {
-                    alert("get Company Fee");
+                success: function (result) {
                     var obj = JSON.parse(result);
                     kickboardtime = obj.estimatedTime;
                     kickGoingFee = obj.kickGoingFee;
@@ -333,21 +336,73 @@
                     limeFee = obj.limeFee;
                     gCooterFee = obj.gCooterFee;
 
-                    alert(kickboardtime);
-                    alert(kickGoingFee);
-                    alert(singSingFee);
-                    alert(swingFee);
-                    alert(swingFee);
-                    alert(gCooterFee);
+                    $("#popup").css('display', 'flex').hide().fadeIn();
+                    var kickGoingBar = document.getElementById("kickGoingBar");
+                    kickGoingBar.setAttribute("data-val",kickGoingFee);
+                    $("#kickGoingBar").html(kickGoingFee);
+
+                    var singSingBar = document.getElementById("singSingBar");
+                    singSingBar.setAttribute("data-val",singSingFee);
+                    $("#singSingBar").html(singSingFee);
+
+                    var swingBar = document.getElementById("swingBar");
+                    swingBar.setAttribute("data-val",swingFee);
+                    $("#swingBar").html(swingFee);
+
+                    var limeBar = document.getElementById("limeBar");
+                    limeBar.setAttribute("data-val",limeFee);
+                    $("#limeBar").html(limeFee);
+
+                    var gCooterBar = document.getElementById("gCooterBar");
+                    gCooterBar.setAttribute("data-val",gCooterFee);
+                    $("#gCooterBar").html(gCooterFee);
+                    drawBarGraph();
+
                 },
-                error: function(request) {
+                error: function (request) {
                     alert("error");
                 }
             })
 
         }
 
+        function modal() {
+            $(function () {
+                $("#confirm").click(function () {
+                    modalClose();
+                    //컨펌 이벤트 처리
+                });
 
+                $('html').click(function () {
+                        modalClose();
+                });
+
+                $("#close").click(function () {
+                    modalClose();
+                });
+
+                function modalClose() {
+                    $("#popup").fadeOut();
+                }
+            });
+        }
+
+
+        function drawBarGraph() {
+
+            var companyFee=[kickGoingFee,singSingFee,swingFee,limeFee,gCooterFee]
+            var maxFee = Math.max(...companyFee);
+            alert(maxFee);
+
+
+            d3.selectAll(".bar")
+                .datum(function () {
+                    return this.dataset;
+                })
+                .style("height", "10%")
+                .transition().duration(3000)
+                .style("height", d => (d.val / maxFee * 100) + "%");
+        }
 
         //마커 생성하기
         function addMarkers(infoObj) {
@@ -457,11 +512,41 @@
     </script>
 
 
+
 </head>
 
 
-
 <body onload="initTmap()">
+
+<div class="popup-wrap" id="popup">
+    <div class="popup">
+        <div class="popup-head">
+          <span class="head-title">
+            kickboard Fee</span>
+        </div>
+        <div class="popup-body">
+            <div class="body-content">
+                <div class="body-contentbox">
+                    <div class="bar-content">
+                        <span class="kickgoing bar" id = "kickGoingBar" data-val=0 >oo</span>
+                        <span class="singsing bar" id = "singSingBar"  data-val=0 >oo</span>
+                        <span class="swing bar" id = "swingBar" data-val=0 >oo</span>
+                        <span class="lime bar" id = "limeBar" data-val=0 >oo</span>
+                        <span class="gcooter bar" id = "gCooterBar" data-val=0 >oo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup-foot">
+            <img class="img" src="companylogo/kickGoingLogo.png" style="left: 0px">
+            <img class="img" src="companylogo/singsingLogo.png" style="left: 6px">
+            <img class="img" src="companylogo/kickGoingLogo.png" style="left: 12px">
+            <img class="img" src="companylogo/kickGoingLogo.png" style="left: 17px">
+            <img class="img" src="companylogo/kickGoingLogo.png" style="left: 23px">
+        </div>
+    </div>
+</div>
+
 <video class="bg-video" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
     <source src="assets/mp4/bg.mp4" type="video/mp4"/>
 </video>

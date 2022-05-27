@@ -1,7 +1,7 @@
 package com.software.demo;
 
 import com.software.demo.kickboard.KickboardFeeCalculator;
-import com.software.demo.kickboard.KickboardTime;
+import com.software.demo.kickboard.KickboardTimeCalculator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,27 +15,24 @@ public class KickboardFee {
     void calculateTime() {
         //given
         double distance = 5;
-        KickboardTime kickboardTime = new KickboardTime(distance);
 
         //when
-        Long time = kickboardTime.calculateKickboardTime(distance);
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
         //then
-        Assertions.assertEquals(25,time);
+        Assertions.assertEquals(25,usingTime);
     }
 
     @Test
-    @DisplayName("이동시간이 소수점일시 반올림 한다.")
+    @DisplayName("이동시간이 소수점일시 첫째자리에서 반올림 한다.")
     void calculateDecimalTime() {
         //given
         double distance = 1.9;
-        KickboardTime kickboardTime = new KickboardTime(distance);
 
-        //when
-        Long time = kickboardTime.calculateKickboardTime(distance);
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
         //then
-        Assertions.assertEquals(10,time);
+        Assertions.assertEquals(10,usingTime);
     }
 
 
@@ -45,8 +42,7 @@ public class KickboardFee {
         //given
         double distance = 10;
         int hour = 3;
-        KickboardTime kickboardTime = new KickboardTime(distance);
-        Long time = kickboardTime.getEstimatedTime();
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
         //when
         KickboardFeeCalculator kickboardFeeCalculator = new KickboardFeeCalculator() {
@@ -55,7 +51,7 @@ public class KickboardFee {
                 return hour;
             }
         };;
-        long fee = kickboardFeeCalculator.getKickGoingFee(time);
+        long fee = kickboardFeeCalculator.getKickGoingFee(usingTime);
 
         //then
         Assertions.assertEquals(5500,fee);
@@ -68,7 +64,7 @@ public class KickboardFee {
         //given
         double distance = 10;
         int hour = 10;
-        KickboardTime kickboardTime = new KickboardTime(distance);
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
         //when
         KickboardFeeCalculator kickboardFeeCalculator = new KickboardFeeCalculator() {
@@ -77,7 +73,7 @@ public class KickboardFee {
                 return hour;
             }
         };
-        long fee = kickboardFeeCalculator.getSingSingFee(kickboardTime.getEstimatedTime());
+        long fee = kickboardFeeCalculator.getSingSingFee(usingTime);
 
         //then
         Assertions.assertEquals(5500,fee);
@@ -91,6 +87,7 @@ public class KickboardFee {
         //when
         KickboardFeeCalculator kickboardFeeCalculator = new KickboardFeeCalculator();
         boolean isNight = kickboardFeeCalculator.isNight(hour, SINGSING);
+
         //then
         Assertions.assertFalse(isNight);
     }
@@ -114,8 +111,7 @@ public class KickboardFee {
         //given
         double distance = 10;
         int hour = 3;
-        KickboardTime kickboardTime = new KickboardTime(distance);
-        Long time = kickboardTime.getEstimatedTime();
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
         //when
         KickboardFeeCalculator kickboardFeeCalculator = new KickboardFeeCalculator() {
@@ -125,7 +121,7 @@ public class KickboardFee {
             }
         };
 
-        long fee = kickboardFeeCalculator.getSingSingFee(time);
+        long fee = kickboardFeeCalculator.getSingSingFee(usingTime);
 
         //then
         Assertions.assertEquals(6500,fee);
@@ -137,8 +133,7 @@ public class KickboardFee {
         //given
         double distance = 10;
         int hour = 10;
-        KickboardTime kickboardTime = new KickboardTime(distance);
-        Long time = kickboardTime.getEstimatedTime();
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
 
         //when
@@ -148,7 +143,7 @@ public class KickboardFee {
                 return hour;
             }
         };
-        long fee = kickboardFeeCalculator.getSwingFee(time);
+        long fee = kickboardFeeCalculator.getSwingFee(usingTime);
 
         //then
         Assertions.assertEquals(6120,fee);
@@ -187,8 +182,7 @@ public class KickboardFee {
     void getSwingNightFee() {
         //given
         double distance = 10;
-        KickboardTime kickboardTime = new KickboardTime(distance);
-        Long time = kickboardTime.getEstimatedTime();
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
         int hour = 3;
 
         //when
@@ -198,7 +192,7 @@ public class KickboardFee {
                 return hour;
             }
         };
-        long fee = kickboardFeeCalculator.getSwingFee(time);
+        long fee = kickboardFeeCalculator.getSwingFee(usingTime);
 
         //then
         Assertions.assertEquals(8220,fee);
@@ -209,12 +203,11 @@ public class KickboardFee {
     void getLimeFee() {
         //given
         double distance = 10;
-        KickboardTime kickboardTime = new KickboardTime(distance);
-        Long time = kickboardTime.getEstimatedTime();
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
         //when
         KickboardFeeCalculator kickboardFeeCalculator = new KickboardFeeCalculator();
-        long fee = kickboardFeeCalculator.getLimeFee(time);
+        long fee = kickboardFeeCalculator.getLimeFee(usingTime);
 
         //then
         Assertions.assertEquals(10200,fee);
@@ -228,12 +221,11 @@ public class KickboardFee {
     void getGcooterFee() {
         //given
         double distance = 10;
-        KickboardTime kickboardTime = new KickboardTime(distance);
-        Long time = kickboardTime.getEstimatedTime();
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
         //when
         KickboardFeeCalculator kickboardFeeCalculator = new KickboardFeeCalculator();
-        long fee = kickboardFeeCalculator.getGcooterFee(time);
+        long fee = kickboardFeeCalculator.getGcooterFee(usingTime);
 
         //then
         Assertions.assertEquals(6670,fee);
@@ -276,8 +268,7 @@ public class KickboardFee {
         //given
         double distance = 10;
         int hour = 3;
-        KickboardTime kickboardTime = new KickboardTime(distance);
-        Long time = kickboardTime.getEstimatedTime();
+        long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
         //when
         KickboardFeeCalculator kickboardFeeCalculator = new KickboardFeeCalculator() {
@@ -287,7 +278,7 @@ public class KickboardFee {
             }
         };;
 
-        long fee = kickboardFeeCalculator.getGcooterFee(time);
+        long fee = kickboardFeeCalculator.getGcooterFee(usingTime);
 
         //then
         Assertions.assertEquals(7370,fee);

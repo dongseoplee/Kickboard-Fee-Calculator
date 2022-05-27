@@ -143,13 +143,13 @@ public class KickboardFeeCalculator {
         return LocalTime.now().getHour();
     }
 
-    public KickboardDto getAllFee(long estimatedTime) {
+    public KickboardDto getAllFee(long usingTime) {
 
-        long kickGoingFee = getKickGoingFee(estimatedTime);
-        long singSingFee = getSingSingFee(estimatedTime);
-        long swingFee = getSwingFee(estimatedTime);
-        long limeFee = getLimeFee(estimatedTime);
-        long gcooterFee = getGcooterFee(estimatedTime);
+        long kickGoingFee = getKickGoingFee(usingTime);
+        long singSingFee = getSingSingFee(usingTime);
+        long swingFee = getSwingFee(usingTime);
+        long limeFee = getLimeFee(usingTime);
+        long gcooterFee = getGcooterFee(usingTime);
 
         KickboardDto kickboardDto = KickboardDto.builder()
                 .kickGoingFee(kickGoingFee)
@@ -157,7 +157,7 @@ public class KickboardFeeCalculator {
                 .swingFee(swingFee)
                 .limeFee(limeFee)
                 .gCooterFee(gcooterFee)
-                .estimatedTime(estimatedTime)
+                .estimatedTime(usingTime)
                 .build();
 
         return kickboardDto;
