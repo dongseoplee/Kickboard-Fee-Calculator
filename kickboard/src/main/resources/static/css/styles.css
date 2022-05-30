@@ -7621,12 +7621,12 @@ textarea.form-control-lg {
 }
 
 .fst-italic {
-  font-style: italic !important;
+  font-family: 'Jua', sans-serif;
   margin-bottom: 20px;
 }
 @media(min-width: 1100px) {
   .fst-italic {
-    font-style: italic !important;
+    font-family: 'Jua', sans-serif;
   }
 }
 
