@@ -143,7 +143,7 @@ public class KickboardFeeCalculator {
 
     public int getNowHour() {
         System.out.println("LocalTime.now().getHour() = " + LocalTime.now().getHour());
-        return 3;
+        return LocalTime.now().getHour();
 
     }
 
