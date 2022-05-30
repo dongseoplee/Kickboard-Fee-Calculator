@@ -24,7 +24,6 @@ public class KickboradController {
     public KickboardDto kickboardFee(@RequestParam String distanceStr) {
 
         Double distance = Double.parseDouble(distanceStr);
-
         long usingTime = kickboardService.getUsingTime(distance);
         KickboardDto kickboardDto = kickboardService.getAllFee(usingTime);
 

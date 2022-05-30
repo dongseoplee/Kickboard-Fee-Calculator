@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Coming Soon - Start Bootstrap Theme</title>
+    <title>Gachon Univ. Kickboard Fee Calculator</title>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Pen+Script&display=swap');
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+    </style>
 
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
     <!-- Font Awesome icons (free version)-->
@@ -210,7 +217,7 @@
 
         // 회사별 요금
         var kickGoingFee;
-        var singSingFee;
+        var singSingFee =0 ;
         var swingFee;
         var limeFee;
         var gCooterFee;
@@ -218,10 +225,11 @@
         //출발지와 도착지 이동거리 및 시간을 요청한다.
         function result() {
             document.getElementById("resultBtn").disabled = true;
+            document.getElementById("feeBtn").style.visibility= "visible";
             $
                 .ajax({
                     method: "POST",
-                    url: "https://apis.openapi.sk.com/tmap/routes?version=1&format=json&callback=result",
+                    url: "https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1&format=json&callback=result",
                     async: false,
                     data: {
                         "appKey": "l7xx568483eb58e3417fb1136f0158e7a251",
@@ -231,9 +239,8 @@
                         "endY": endMarker.getPosition().lat().toString(),
                         "reqCoordType": "WGS84GEO",
                         "resCoordType": "EPSG3857",
-                        "searchOption": "12", // 이륜차도로우선
-                        "trafficInfo": "N", // 교통정보 표출 옵션
-                        "tollgateFareOption": "8" //요금 가중치 정보 8: 무료 우선
+                        "startName" : "출발지",
+                        "endName" : "도착지"
                     },
 
                     success: function (response) {
@@ -251,7 +258,7 @@
                             + resultData[0].properties.taxiFare
                             + "원";
 
-                        alert(tDistance + tTime + tFare + taxiFare)
+
                         //교통정보 표출 옵션값을 체크
 
                         for (var i in resultData) { //for문 [S]
@@ -336,27 +343,11 @@
                     limeFee = obj.limeFee;
                     gCooterFee = obj.gCooterFee;
 
-                    $("#popup").css('display', 'flex').hide().fadeIn();
-                    var kickGoingBar = document.getElementById("kickGoingBar");
-                    kickGoingBar.setAttribute("data-val",kickGoingFee);
-                    $("#kickGoingBar").html(kickGoingFee);
-
-                    var singSingBar = document.getElementById("singSingBar");
-                    singSingBar.setAttribute("data-val",singSingFee);
-                    $("#singSingBar").html(singSingFee);
-
-                    var swingBar = document.getElementById("swingBar");
-                    swingBar.setAttribute("data-val",swingFee);
-                    $("#swingBar").html(swingFee);
-
-                    var limeBar = document.getElementById("limeBar");
-                    limeBar.setAttribute("data-val",limeFee);
-                    $("#limeBar").html(limeFee);
-
-                    var gCooterBar = document.getElementById("gCooterBar");
-                    gCooterBar.setAttribute("data-val",gCooterFee);
-                    $("#gCooterBar").html(gCooterFee);
+                    alert(" 이동거리 : " + tDistance + "Km    " + "예상이동시간 : " + kickboardtime + "분")
+                    $("#distance").html(tDistance + "Km");
+                    $("#kickboardTime").html(kickboardtime+"분");
                     drawBarGraph();
+                    emphasisMinFeeCompany();
 
                 },
                 error: function (request) {
@@ -365,7 +356,35 @@
             })
 
         }
+        
+        function emphasisMinFeeCompany() {
 
+            var companyFee=[kickGoingFee,singSingFee,swingFee,limeFee,gCooterFee]
+            var minFee = Math.min(...companyFee);
+            var head = document.getElementById("popupHead");
+            if(minFee == kickGoingFee) {
+                head.style.backgroundColor = "#02B798";
+                document.getElementById("kickGoingBar").classList.add("min-text");
+            }
+            else if(minFee == singSingFee) {
+                head.style.backgroundColor = "#FFD939";
+                document.getElementById("singSingBar").classList.add("min-text");
+            }
+            else if(minFee == swingFee) {
+                head.style.backgroundColor = "#ffffff";
+                document.getElementById("swingBar").classList.add("min-text");
+            }
+            else if(minFee == limeFee) {
+                head.style.backgroundColor = "#BEF000";
+                document.getElementById("limeBar").classList.add("min-text");
+            }
+            else{
+                head.style.backgroundColor = "#19A93D";
+                document.getElementById("gCooterBar").classList.add("min-text");
+            }
+            
+        }
+        
         function modal() {
             $(function () {
                 $("#confirm").click(function () {
@@ -373,9 +392,10 @@
                     //컨펌 이벤트 처리
                 });
 
-                $('html').click(function () {
-                        modalClose();
+                $('#popup').click(function () {
+                    modalClose();
                 });
+
 
                 $("#close").click(function () {
                     modalClose();
@@ -390,17 +410,36 @@
 
         function drawBarGraph() {
 
+            $("#popup").css('display', 'flex').hide().fadeIn();
+            var kickGoingBar = document.getElementById("kickGoingBar");
+            kickGoingBar.setAttribute("data-val",kickGoingFee);
+            $("#kickGoingBar").html(kickGoingFee);
+
+            var singSingBar = document.getElementById("singSingBar");
+            singSingBar.setAttribute("data-val",singSingFee);
+            $("#singSingBar").html(singSingFee);
+
+            var swingBar = document.getElementById("swingBar");
+            swingBar.setAttribute("data-val",swingFee);
+            $("#swingBar").html(swingFee);
+
+            var limeBar = document.getElementById("limeBar");
+            limeBar.setAttribute("data-val",limeFee);
+            $("#limeBar").html(limeFee);
+
+            var gCooterBar = document.getElementById("gCooterBar");
+            gCooterBar.setAttribute("data-val",gCooterFee);
+            $("#gCooterBar").html(gCooterFee);
+
             var companyFee=[kickGoingFee,singSingFee,swingFee,limeFee,gCooterFee]
             var maxFee = Math.max(...companyFee);
-            alert(maxFee);
-
 
             d3.selectAll(".bar")
                 .datum(function () {
                     return this.dataset;
                 })
                 .style("height", "10%")
-                .transition().duration(3000)
+                .transition().duration(5000)
                 .style("height", d => (d.val / maxFee * 100) + "%");
         }
 
@@ -509,6 +548,11 @@
         function onError() {
             alert("onError");
         }
+
+        function fee() {
+            drawBarGraph();
+            emphasisMinFeeCompany();
+        }
     </script>
 
 
@@ -520,7 +564,7 @@
 
 <div class="popup-wrap" id="popup">
     <div class="popup">
-        <div class="popup-head">
+        <div class="popup-head" id="popupHead">
           <span class="head-title">
             kickboard Fee</span>
         </div>
@@ -538,11 +582,17 @@
             </div>
         </div>
         <div class="popup-foot">
-            <img class="img" src="companylogo/kickGoingLogo.png" style="left: 0px">
-            <img class="img" src="companylogo/singsingLogo.png" style="left: 6px">
-            <img class="img" src="companylogo/swingLogo.png" style="left: 12px">
-            <img class="img" src="companylogo/limeLogo.png" style="left: 17px">
-            <img class="img" src="companylogo/gcooterLogo.png" style="left: 23px">
+            <img class="img mobileImg-1" src="companylogo/kickGoingLogo.png">
+            <img class="img mobileImg-2" src="companylogo/singsingLogo.png">
+            <img class="img mobileImg-3" src="companylogo/swingLogo.png">
+            <img class="img mobileImg-4" src="companylogo/limeLogo.png">
+            <img class="img mobileImg-5" src="companylogo/gcooterLogo.png">
+        </div>
+        <div class="popup-foot-message">
+                <p class="footMessage float-left" style="color: #0d6efd": #0d6efd;>  이동거리 : </p>
+                <p id= "distance" class="message float-left" style="color: #0d6efd">5km</p>
+                <p class="footMessage float-left" style="color: #0d6efd">예상이동시간 : </p>
+                <p id= "kickboardTime" class="message float-left" style="color: #0d6efd">5km</p>
         </div>
     </div>
 </div>
@@ -575,6 +625,8 @@
         <button class="btn btn-dark m-3" id="epBtn" type="button" onclick="selectEP()" style="visibility: hidden">도착지
         </button>
         <button class="btn btn-dark m-3" id="resultBtn" type="button" onclick="result()" style="visibility: hidden">결과
+        </button>
+        <button class="btn btn-dark m-3" id="feeBtn" type="button" onclick="fee()" style="visibility: hidden">요금
         </button>
     </div>
 </div>

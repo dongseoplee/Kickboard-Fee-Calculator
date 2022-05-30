@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import static com.software.demo.kickboard.KickboardCompany.*;
 
 public class KickboardFee {
@@ -109,7 +112,7 @@ public class KickboardFee {
     @DisplayName("씽씽-심야요금을 계산한다")
     void getSingSingNightFee() {
         //given
-        double distance = 10;
+        double distance = 1.6;
         int hour = 3;
         long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
@@ -124,7 +127,7 @@ public class KickboardFee {
         long fee = kickboardFeeCalculator.getSingSingFee(usingTime);
 
         //then
-        Assertions.assertEquals(6500,fee);
+        Assertions.assertEquals(2300,fee);
     }
 
     @Test
@@ -182,6 +185,7 @@ public class KickboardFee {
     void getSwingNightFee() {
         //given
         double distance = 10;
+        System.out.println("LocalTime.now().getHour() = " + LocalTime.now().getHour());
         long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
         int hour = 3;
 
@@ -221,10 +225,16 @@ public class KickboardFee {
     void getGcooterFee() {
         //given
         double distance = 10;
+        int hour = 10;
         long usingTime = KickboardTimeCalculator.calculateUsingTime(distance);
 
         //when
-        KickboardFeeCalculator kickboardFeeCalculator = new KickboardFeeCalculator();
+        KickboardFeeCalculator kickboardFeeCalculator = new KickboardFeeCalculator() {
+            @Override
+            public int getNowHour() {
+                return hour;
+            }
+        };
         long fee = kickboardFeeCalculator.getGcooterFee(usingTime);
 
         //then

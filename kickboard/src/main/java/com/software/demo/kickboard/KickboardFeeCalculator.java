@@ -10,31 +10,30 @@ import static com.software.demo.kickboard.KickboardCompany.*;
 public class KickboardFeeCalculator {
 
 
-    public long getKickGoingFee(long minute) {
+    public long getKickGoingFee(long usingTime) {
         long kickGoingFee = KICKGOING.getBasicFee();
 
-        if (minute > KICKGOING.basicMinute) {
-            kickGoingFee = kickGoingFee + KICKGOING.perMinuteFee * (minute - KICKGOING.basicMinute);
+        if (usingTime > KICKGOING.basicMinute) {
+            kickGoingFee = kickGoingFee + KICKGOING.perMinuteFee * (usingTime - KICKGOING.basicMinute);
         }
         return kickGoingFee;
     }
 
-    public long getSingSingFee(long minute) {
+    public long getSingSingFee(long usingTime) {
         long singsingFee;
         int nowHour = getNowHour();
 
         if (isNight(nowHour,SINGSING)) {
             singsingFee = SINGSINGNIGTH.getBasicFee();
-
-            if (minute > SINGSINGNIGTH.basicMinute) {
-                singsingFee = singsingFee + SINGSINGNIGTH.perMinuteFee * (minute - SINGSINGNIGTH.basicMinute);
+            if (usingTime > SINGSINGNIGTH.basicMinute) {
+                singsingFee = singsingFee + SINGSINGNIGTH.perMinuteFee * (usingTime - SINGSINGNIGTH.basicMinute);
             }
 
         } else {
             singsingFee = SINGSING.getBasicFee();
 
-            if (minute > SINGSING.basicMinute) {
-                singsingFee = singsingFee + SINGSING.perMinuteFee * (minute - SINGSING.basicMinute);
+            if (usingTime > SINGSING.basicMinute) {
+                singsingFee = singsingFee + SINGSING.perMinuteFee * (usingTime - SINGSING.basicMinute);
             }
         }
 
@@ -50,22 +49,22 @@ public class KickboardFeeCalculator {
         return false;
     }*/
 
-    public long getSwingFee(long minute) {
+    public long getSwingFee(long usingTime) {
         long swingFee;
         int nowHour = getNowHour();
 
         if (isNight(nowHour,SWING)) {
             swingFee = SWINGNIGHT.getBasicFee();
 
-            if (minute > SWINGNIGHT.basicMinute) {
-                swingFee = swingFee + SWINGNIGHT.perMinuteFee * (minute - SWINGNIGHT.basicMinute);
+            if (usingTime > SWINGNIGHT.basicMinute) {
+                swingFee = swingFee + SWINGNIGHT.perMinuteFee * (usingTime - SWINGNIGHT.basicMinute);
             }
 
         } else {
             swingFee = SWING.getBasicFee();
 
-            if (minute > SWING.basicMinute) {
-                swingFee = swingFee + SWING.perMinuteFee * (minute - SWING.basicMinute);
+            if (usingTime > SWING.basicMinute) {
+                swingFee = swingFee + SWING.perMinuteFee * (usingTime - SWING.basicMinute);
             }
         }
         return (long) (swingFee * (0.6));
@@ -79,17 +78,17 @@ public class KickboardFeeCalculator {
         return false;
     }*/
 
-    public long getLimeFee(long minute) {
+    public long getLimeFee(long usingTime) {
 
         long limeFee = LIME.getBasicFee();
 
-        if (minute > LIME.basicMinute) {
-            limeFee = limeFee + LIME.perMinuteFee * (minute - LIME.basicMinute);
+        if (usingTime > LIME.basicMinute) {
+            limeFee = limeFee + LIME.perMinuteFee * (usingTime - LIME.basicMinute);
         }
         return limeFee;
     }
 
-    public long getGcooterFee(long minute) {
+    public long getGcooterFee(long usingTime) {
 
         long gcooterFee;
         int nowHour = getNowHour();
@@ -98,15 +97,15 @@ public class KickboardFeeCalculator {
         if (isNight(nowHour, GCOOTER)) {
             gcooterFee = GCOOTERNIGHT.getBasicFee();
 
-            if (minute > GCOOTERNIGHT.basicMinute) {
-                gcooterFee = gcooterFee + GCOOTERNIGHT.perMinuteFee * (minute - GCOOTERNIGHT.basicMinute);
+            if (usingTime > GCOOTERNIGHT.basicMinute) {
+                gcooterFee = gcooterFee + GCOOTERNIGHT.perMinuteFee * (usingTime - GCOOTERNIGHT.basicMinute);
             }
 
         } else {
             gcooterFee = GCOOTER.getBasicFee();
 
-            if (minute > GCOOTER.basicMinute) {
-                gcooterFee = gcooterFee + GCOOTER.perMinuteFee * (minute - GCOOTER.basicMinute);
+            if (usingTime > GCOOTER.basicMinute) {
+                gcooterFee = gcooterFee + GCOOTER.perMinuteFee * (usingTime - GCOOTER.basicMinute);
             }
         }
 
@@ -121,16 +120,19 @@ public class KickboardFeeCalculator {
         switch (company) {
             case GCOOTER:
                 if (hour >= 0 && hour < 5) {
+                    System.out.println("isNight true");
                     return true;
                 }
                 break;
             case SWING:
                 if (hour >= 21 || hour < 6) {
+                    System.out.println("isNight true");
                     return true;
                 }
                 break;
             case SINGSING:
                 if (hour >= 0 && hour < 6) {
+                    System.out.println("isNight true");
                     return true;
                 }
                 break;
@@ -140,7 +142,9 @@ public class KickboardFeeCalculator {
     }
 
     public int getNowHour() {
-        return LocalTime.now().getHour();
+        System.out.println("LocalTime.now().getHour() = " + LocalTime.now().getHour());
+        return 3;
+
     }
 
     public KickboardDto getAllFee(long usingTime) {
