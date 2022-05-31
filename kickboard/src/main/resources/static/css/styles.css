@@ -3242,6 +3242,7 @@ textarea.form-control-lg {
   color: #fff;
   background-color: #000000;
   border-color: #000000;
+  border-radius: 10px;
 }
 
 .btn-dark:hover {
@@ -11706,6 +11707,36 @@ p{
   left: 25px;
 }
 
+@media (min-width: 500px) {
+  .mobileImg-1 {
+    left: 1px;
+  }
+}
+
+@media (min-width: 500px) {
+  .mobileImg-2 {
+    left: 4px;
+  }
+}
+
+@media (min-width: 500px) {
+  .mobileImg-3 {
+    left: 8px;
+  }
+}
+
+@media (min-width: 500px) {
+  .mobileImg-4 {
+    left: 13px;
+  }
+}
+
+@media (min-width: 500px) {
+  .mobileImg-5 {
+    left: 17px;
+  }
+}
+
 
 
 @media (min-width: 1100px) {
@@ -11728,7 +11759,7 @@ p{
 
 @media (min-width: 1100px) {
   .mobileImg-4 {
-    left: 13px;
+    left: 15px;
   }
 }
 
@@ -11752,6 +11783,18 @@ p{
 .float-left {
   float: left;
 }
+
+@media (min-width: 500px) {
+  .border-rad {
+    border-radius: 10px;
+  }
+}
+
+.border-rad {
+  border-radius: 20px;
+}
+
+
 
 
 
