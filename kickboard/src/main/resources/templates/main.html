@@ -7,6 +7,7 @@
     <meta name="author" content=""/>
     <title>Gachon Univ. Kickboard Fee Calculator</title>
     <style>
+
         @import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Pen+Script&display=swap');
         * {
             font-family: 'Jua', sans-serif;
@@ -72,7 +73,8 @@
                             // map 생성
                             // Tmap.map을 이용하여, 지도가 들어갈 div, 넓이, 높이를 설정합니다.
                             map = new Tmapv2.Map("map_div", {
-                                center: new Tmapv2.LatLng(gpsLatitude, gpsLongitude), // 지도 초기 좌표
+                                // 지도 초기 좌표
+                                center: new Tmapv2.LatLng(gpsLatitude, gpsLongitude),
                                 width: "400px", // map의 width 설정
                                 height: "400px", // map의 height 설정
                                 zoom: 15 //화면 확대 level
@@ -620,12 +622,12 @@
 
 <div class="social-icons">
     <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
-        <button class="btn btn-dark m-3 border-rad" id="spBtn" type="button" onclick="selectSP()">출발지</button>
-        <button class="btn btn-dark m-3 border-rad" id="epBtn" type="button" onclick="selectEP()" style="visibility: hidden">도착지
+        <button class="btn btn-dark m-3" id="spBtn" type="button" onclick="selectSP()">출발지</button>
+        <button class="btn btn-dark m-3" id="epBtn" type="button" onclick="selectEP()" style="visibility: hidden">도착지
         </button>
-        <button class="btn btn-dark m-3 border-rad" id="resultBtn" type="button" onclick="result()" style="visibility: hidden">결과
+        <button class="btn btn-dark m-3" id="resultBtn" type="button" onclick="result()" style="visibility: hidden">결과
         </button>
-        <button class="btn btn-dark m-3 border-rad" id="feeBtn" type="button" onclick="fee()" style="visibility: hidden">요금
+        <button class="btn btn-dark m-3" id="feeBtn" type="button" onclick="fee()" style="visibility: hidden">요금
         </button>
     </div>
 </div>
