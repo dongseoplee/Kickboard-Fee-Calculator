@@ -89,7 +89,7 @@
 
                     //gps가 꺼져있는 경우
                     else {
-                        alert("주소창 오른쪽 위치 액세스 허용");
+                        alert("위치 액세스 허용 후 새로고침 해주세요!");
                         navigator.geolocation.getCurrentPosition(position => {
                             gpsLatitude = position.coords.latitude;
                             gpsLongitude = position.coords.longitude;
@@ -189,7 +189,7 @@
             document.getElementById("spBtn").disabled = true; //출발지 선택 버튼 비활성화
             document.getElementById("epBtn").style.visibility = "visible";//도착지 버튼 보여준다.
 
-            alert("출발지 선택");
+            alert("출발지 선택완료! 도착지를 선택하세요");
         }
 
         function selectEP() {
@@ -204,7 +204,7 @@
             document.getElementById("epBtn").disabled = true; //도착직 선택 버튼 비활성화
             document.getElementById("resultBtn").style.visibility = "visible";//결과 버튼 보여준다.
 
-            alert("도착지 선택");
+            alert("도착지 선택완료! 결과를 확인하세요");
 
         }
 
@@ -564,37 +564,38 @@
 <body onload="initTmap()">
 
 <div class="popup-wrap" id="popup">
-    <div class="popup">
-        <div class="popup-head" id="popupHead">
+    <div class="popup" style="background-color: rgb(239 191 233)">
+        <div class="popup-head" id="popupHead" style="background-color: rgb(239 191 233)">
           <span class="head-title">
             kickboard Fee</span>
         </div>
         <div class="popup-body">
-            <div class="body-content">
+            <div class="body-content" style="background-color: rgb(239 191 233);">
                 <div class="body-contentbox">
-                    <div class="bar-content">
+                    <div class="bar-content" style="background-color : rgb(239 191 233);">
                         <span class="kickgoing bar" id = "kickGoingBar" data-val=0 >oo</span>
                         <span class="singsing bar" id = "singSingBar"  data-val=0 >oo</span>
                         <span class="swing bar" id = "swingBar" data-val=0 >oo</span>
                         <span class="lime bar" id = "limeBar" data-val=0 >oo</span>
                         <span class="gcooter bar" id = "gCooterBar" data-val=0 >oo</span>
+
+                        <img class="img mobileImg-1" src="companylogo/kickGoingLogo.png">
+                        <img class="img mobileImg-2" src="companylogo/singsingLogo.png">
+                        <img class="img mobileImg-3" src="companylogo/swingLogo.png">
+                        <img class="img mobileImg-4" src="companylogo/limeLogo.png">
+                        <img class="img mobileImg-5" src="companylogo/gcooterLogo.png">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="popup-foot">
-            <img class="img mobileImg-1" src="companylogo/kickGoingLogo.png">
-            <img class="img mobileImg-2" src="companylogo/singsingLogo.png">
-            <img class="img mobileImg-3" src="companylogo/swingLogo.png">
-            <img class="img mobileImg-4" src="companylogo/limeLogo.png">
-            <img class="img mobileImg-5" src="companylogo/gcooterLogo.png">
-        </div>
+
         <div class="popup-foot-message">
-                <p class="footMessage float-left" style="color: #0d6efd": #0d6efd;>  이동거리 : </p>
-                <p id= "distance" class="message float-left" style="color: #0d6efd">5km</p>
-                <p class="footMessage float-left" style="color: #0d6efd">예상이동시간 : </p>
-                <p id= "kickboardTime" class="message float-left" style="color: #0d6efd">5km</p>
+                <p class="footMessage float-left" style="color: #4a55b4;">  이동거리 : </p>
+                <p id= "distance" class="message float-left" style="color: #4a55b4;">5km</p>
+                <p class="footMessage float-left" style="color: #4a55b4">예상이동시간 : </p>
+                <p id= "kickboardTime" class="message float-left" style="color: #4a55b4">5km</p>
         </div>
+
     </div>
 </div>
 
@@ -622,12 +623,12 @@
 
 <div class="social-icons">
     <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
-        <button class="btn btn-dark m-3" id="spBtn" type="button" onclick="selectSP()">출발지</button>
-        <button class="btn btn-dark m-3" id="epBtn" type="button" onclick="selectEP()" style="visibility: hidden">도착지
+        <button class="btn btn-dark m-3 border-rd" id="spBtn" type="button" onclick="selectSP()">출발지</button>
+        <button class="btn btn-dark m-3 border-rd" id="epBtn" type="button" onclick="selectEP()" style="visibility: hidden">도착지
         </button>
-        <button class="btn btn-dark m-3" id="resultBtn" type="button" onclick="result()" style="visibility: hidden">결과
+        <button class="btn btn-dark m-3 border-rd" id="resultBtn" type="button" onclick="result()" style="visibility: hidden">결과
         </button>
-        <button class="btn btn-dark m-3" id="feeBtn" type="button" onclick="fee()" style="visibility: hidden">요금
+        <button class="btn btn-dark m-3 border-rd" id="feeBtn" type="button" onclick="fee()" style="visibility: hidden">요금
         </button>
     </div>
 </div>

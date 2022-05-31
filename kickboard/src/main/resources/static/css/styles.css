@@ -3030,32 +3030,32 @@ textarea.form-control-lg {
 
 .btn-primary {
   color: #fff;
-  background-color: #2a5555;
-  border-color: #2a5555;
+  background-color: #4a55b4;
+  border-color:  #4a55b4;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #244848;
-  border-color: #224444;
+  background-color: #4a55b4;
+  border-color: #4a55b4;
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus {
   color: #fff;
-  background-color: #244848;
-  border-color: #224444;
+  background-color: #4a55b4;
+  border-color: #4a55b4;
   box-shadow: 0 0 0 0.25rem rgba(74, 111, 111, 0.5);
 }
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #224444;
-  border-color: #204040;
+  background-color: #4a55b4;
+  border-color: #4a55b4;
 }
 .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.25rem rgba(74, 111, 111, 0.5);
 }
 .btn-primary:disabled, .btn-primary.disabled {
   color: #fff;
-  background-color: #2a5555;
-  border-color: #2a5555;
+  background-color: #4a55b4;
+  border-color: #4a55b4;
 }
 
 .btn-secondary {
@@ -3240,14 +3240,14 @@ textarea.form-control-lg {
 
 .btn-dark {
   color: #fff;
-  background-color: #000000;
-  border-color: #000000;
+  background-color: #4a55b4;
+  border-color: #4a55b4;
 }
 
 .btn-dark:hover {
   color: #fff;
-  background-color: black;
-  border-color: black;
+  background-color: #4a55b4;
+  border-color: #4a55b4;
 }
 .btn-check:focus + .btn-dark, .btn-dark:focus {
   color: #fff;
@@ -11327,7 +11327,7 @@ video.bg-video {
 
 @media (pointer: coarse) and (hover: none) {
   body {
-    background: url("../assets/img/bg-mobile-fallback.jpg") #2a5555 no-repeat center center scroll;
+    background: url("../assets/img/bg-mobile-fallback.jpg") no-repeat center center scroll;
     background-size: cover;
   }
 
@@ -11352,7 +11352,7 @@ video.bg-video {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgb(239 191 233 / 60%);
 }
 .masthead .masthead-content {
   position: relative;
@@ -11441,8 +11441,8 @@ video.bg-video {
 @media (min-width: 1100px) {
   .btn-dark {
     color: #fff;
-    background-color: #2a5555;
-    border-color: #2a5555;
+    background-color: #4a55b4;
+    border-color: #4a55b4;
   }
 }
 
@@ -11478,8 +11478,8 @@ video.bg-video {
 @media (min-width: 1100px) {
   .btn-dark:disabled, .btn-dark.disabled {
     color: #fff;
-    background-color: #2a5555;
-    border-color: #2a5555;
+    background-color: black;
+    border-color: black;
   }
 }
 
@@ -11562,6 +11562,7 @@ p{
   font-weight: 700;
   letter-spacing: -1px;
   text-align: center;
+  color: #4a55b4
 }
 .popup-body{
   width:100%;
@@ -11674,6 +11675,7 @@ p{
   display: inline-block;
   width: 60px;
   height: 60px;
+  bottom: -240px;
 }
 
 .img-content {
@@ -11686,20 +11688,22 @@ p{
   color: #ff0000;
 }
 
+
+
 .mobileImg-1 {
   left: 1px;
 }
 
 .mobileImg-2 {
-  left: 7px;
+  left: 6px;
 }
 
 .mobileImg-3 {
-  left: 13px;
+  left: 11px;
 }
 
 .mobileImg-4 {
-  left: 17px;
+  left: 18px;
 }
 
 .mobileImg-5 {
@@ -11708,31 +11712,31 @@ p{
 
 
 
-@media (min-width: 1100px) {
+@media (min-width: 500px) {
   .mobileImg-1 {
-    left: 1px;
+    left: 0px;
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 500px) {
   .mobileImg-2 {
     left: 5px;
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 500px) {
   .mobileImg-3 {
     left: 10px;
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 500px) {
   .mobileImg-4 {
     left: 13px;
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 500px) {
   .mobileImg-5 {
     left: 18px;
   }
@@ -11746,11 +11750,27 @@ p{
 .message {
   padding-top: 5px;
   padding-left: 5px;
+  text-decoration-line: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 3px;
+  text-underline-position:under;
 }
 
 
 .float-left {
   float: left;
+  position: relative;
+  bottom: -70px;
+}
+
+.border-rd {
+  border-radius: 15px;
+}
+
+@media (min-width: 500px) {
+  .border-rd {
+    border-radius: 18px;
+  }
 }
 
 
