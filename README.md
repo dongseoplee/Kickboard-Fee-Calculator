@@ -24,7 +24,8 @@ You can use the search bar to move the map to where you want to find it.<br>
 
 ## Structure
 <img src="https://user-images.githubusercontent.com/76763417/177947783-200bc43a-9c2e-4817-ade2-34a30784fb87.png" width=600 height=300><br>
+
 ## Tech Stack
-[Front-End] HTML / CSS / JavaScript, Bootstrap
-[Back-End] Spring, AWS EC2, Route 53, Load Balancer, Certificate Manager
+[Front-End] HTML / CSS / JavaScript, Bootstrap <br><br>
+[Back-End] Spring Boot, AWS EC2, Route 53, Load Balancer, Certificate Manager
 
