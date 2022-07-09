@@ -12,7 +12,7 @@ Allow location access to https://dongsseop2.com
 
 Refresh at https://dongsseop2.com and you will see a T-map.
 
-Set the start marker on the map and press the start button.
+Set the start marker on the map and click the start button.
 
 Set the destination marker on the map and press the destination button.<br>
 <img src="https://user-images.githubusercontent.com/76763417/177947404-c8ee24ce-6464-41b9-8ecf-0050cbf32307.png"><br>
