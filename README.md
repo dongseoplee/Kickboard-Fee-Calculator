@@ -16,7 +16,7 @@ Set the start marker on the map and press the start button.
 
 Set the destination marker on the map and press the destination button.<br>
 <img src="https://user-images.githubusercontent.com/76763417/177947404-c8ee24ce-6464-41b9-8ecf-0050cbf32307.png"><br>
-Press the Result button to view the estimated kickboard rates in a pop-up format for each company.<br>
+Click the Result button to view the estimated kickboard rates in a pop-up format for each company.<br>
 <img src="https://user-images.githubusercontent.com/76763417/177947640-d549202b-3db8-499e-ac23-2afd91c2a7d7.png"><br>
 You can use the search bar to move the map to where you want to find it.<br>
 <img src="https://user-images.githubusercontent.com/76763417/177947740-0415bce3-3b3e-4b1f-b998-275f8aac0ec8.jpg" width= 400 height=400><br>
