@@ -2,15 +2,15 @@
 2022 Gachon University Software Engineering class term project.<br>
 The website uses T-map api to calculate kickboard fee.
 
-Page for testing: https://dongsseop2.com
+Page for testing: ~~https://dongsseop2.com~~
 
 
 ## Description
-From a Chrome browser, go to https://dongsseop2.com
+From a Chrome browser, go to ~~https://dongsseop2.com~~
 
-Allow location access to https://dongsseop2.com
+Allow location access to ~~https://dongsseop2.com~~
 
-Refresh at https://dongsseop2.com and you will see a T-map.
+Refresh at ~~https://dongsseop2.com~~ and you will see a T-map.
 
 Set the start marker on the map and click the start button.
 
